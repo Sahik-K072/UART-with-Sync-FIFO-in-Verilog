@@ -13,7 +13,7 @@ I have implemented the UART modules using FSMs.
 
 <h3>TX module</h3>
 
-<img width="433" height="333" alt="Screenshot 2026-08-05 001258" src="https://github.com/user-attachments/assets/67844be6-5189-40fd-b3f5-0a94c90fcf5d" />
+<img width="438" height="316" alt="Screenshot 2026-08-06 161409" src="https://github.com/user-attachments/assets/05ce50e8-1927-4d1a-b78a-cc7b49cc9e93" />
 
 This module takes the 1 byte data to be sent, and sends it when:
 
@@ -34,7 +34,7 @@ When the stop bit is sent, it pulls the tx_done line high for 1 system clock to 
 
 <h3>RX module</h3>
 
-<img width="481" height="344" alt="Screenshot 2026-08-05 001326" src="https://github.com/user-attachments/assets/884b1af7-cdec-4b75-a27f-3347426a11cc" />
+<img width="418" height="329" alt="Screenshot 2026-08-06 161313" src="https://github.com/user-attachments/assets/2a52831d-fa59-46a9-b590-0797438c4539" />
 
 This module receives the 11 bits from the TX module, checks the parity and stop bits for parity and frame errors respectively, and raises the corresponding flags in case of errors. Then, it takes the received byte and stores it in the FIFO for temporary storage before being read by another block/component. 
 
