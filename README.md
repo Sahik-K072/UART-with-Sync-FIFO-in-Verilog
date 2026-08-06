@@ -42,7 +42,7 @@ It asserts the rts(request to send) line (active-low) when:
 
 
 - rx_request signal is high (requesting data to be received)
-- full signal is high (the FIFO buffer is not full and more data can be stored)
+- full signal is high (the FIFO buffer is not full and more data can be stored)\
 **\*full is active-low signal**
 
 It also has an internal baud tick generator which can be parameterized.\
