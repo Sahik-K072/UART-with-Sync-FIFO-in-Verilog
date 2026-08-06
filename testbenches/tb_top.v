@@ -46,10 +46,10 @@ end
 reg [fifo_width-1:0] tx_data [fifo_depth-1:0];
 integer i,j=0;
 initial begin
-    tx_fifo_reset=0;
-    rx_fifo_reset=0;
-    tx_fifo_write=0;
-    rx_fifo_read_next=0;
+    tx_fifo_reset=0; rx_fifo_reset=0;
+    tx_fifo_write=0; rx_fifo_read_next=0;
+    tx_request=0; rx_request=0;
+    
     for(i=0;i<fifo_depth;i=i+1) begin
         tx_data[i]=$urandom;
     end
@@ -58,14 +58,12 @@ initial begin
        rx_fifo_reset=1;
     
     i=0;
-    repeat(fifo_depth*2) begin
-        @(posedge clk);
+    repeat(fifo_depth) begin
         data_in=tx_data[i];
-        if(tx_fifo_write==0) tx_fifo_write=1;
-        else if (tx_fifo_write==1) begin
-            tx_fifo_write=0;
-            i=i+1;
-        end
+        tx_fifo_write=1;
+        #(clk_delay*2) tx_fifo_write=0;
+        i=i+1;
+        #1;
     end
     
     #1 tx_request=1;
@@ -80,7 +78,7 @@ initial begin
         j=j+1;
         rx_fifo_read_next<=1;
         #(clk_delay*2) rx_fifo_read_next<=0;
-        #clk_delay;
+        #1;
     end
     
     #2 $finish;
